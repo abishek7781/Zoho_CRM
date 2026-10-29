@@ -10,7 +10,7 @@ User approved the role-workspace and automation restructuring plan and requested
 | T01 | Finalise the 22-activity control matrix | All 22 activities have owner, prerequisites, evidence, optional paths, next task and notification policy | Complete: specification only |
 | T02 | Map and align authoritative fields/layouts | Existing fields mapped; layout gaps repaired safely; remaining source/permission dependencies explicit | Baseline implemented: two existing fields added to Deal Pipeline and verified; accounting/permission checks remain in later tasks |
 | T03 | Repair qualification, contact and sales gates | Missing/invalid contact, requirements, quote and order data blocked; controlled exceptions; WhatsApp consent separated | Draft re-saved and reopened: Discovery now gates on Mobile Number present OR Email Consent Verified=true; Mobile Number optional and Email Consent Verified mandatory; Quote Sent and Order Confirmation controls, acceptance checklist, Contract Value validation, existing handoff workflow and sender eligibility verified; not published; runtime checks blocked |
-| T04 | Repair financial gates and MD approvals | Approved amount/version; verified receipt; partial payments; rejection/resubmission and no self-approval bypass | Blocked after read-only inspection: Advance Payment Requested still has legacy exact ₹10,000 validation; authoritative amount/version source, receipt verifier, partial-payment handling and MD approval/self-approval path are not established. No financial draft change saved. |
+| T04 | Repair financial gates and MD approvals | Approved amount/version; verified receipt; partial payments; rejection/resubmission and no self-approval bypass | Partially implemented in unpublished draft: Advance Payment Requested now requires Advance Amount >= 0.01, Advance Requested Date and Advance Due Date; MD approval/self-approval, authoritative source/version, receipt verifier and partial-payment handling remain blocked. |
 | T05 | Repair visit, preparation, execution and closure gates | Correct dates, readiness, evidence, conditional contract/sample paths and closure exceptions | Queued |
 | T06 | Connect small action forms for all 22 activities | Reuse Kiosks/Wizards; preload same records; validate, write and bind each action; hide routing fields | Queued |
 | T07 | Configure Sales workspace and My Work | Current-user owned work; enquiries, follow-ups, quotations and handoffs; no duplicate customer records | Queued |
@@ -20,7 +20,7 @@ User approved the role-workspace and automation restructuring plan and requested
 | T11 | Configure internal reminders and customer notifications | Assigned-person notification, agreed escalation, cancellation on completion/reschedule; consent/template/dedup guards | Queued |
 | T12 | Acceptance, controlled release and user guide | Positive/negative/role/repeat/failure cases pass; rollback recorded; three-role guide available | Queued |
 
-Progress: T01 specification complete; T02 baseline field alignment implemented; T03 remains partially configured in an unpublished draft with the controlled email-route gate saved and persistence verified. T04 is blocked on the authoritative financial source and approval design; T05–T12 remain queued. No percentage of live CRM implementation is implied. T06 contains 22 separately verified action forms.
+Progress: T01 specification complete; T02 baseline field alignment implemented; T03 remains partially configured in an unpublished draft with the controlled email-route gate saved and persistence verified. T04 has saved draft controls but remains incomplete on authoritative financial source and approval design; T05–T12 remain queued. No percentage of live CRM implementation is implied. T06 contains 22 separately verified action forms.
 
 ## Implementation journal — 30 October continuation on this device
 
@@ -41,11 +41,11 @@ Progress: T01 specification complete; T02 baseline field alignment implemented; 
 - Attempted to attach a new `Email-only contact exception` checklist through the During > Checklists picker, but the entry did not persist after save/reopen. The saved control therefore relies on mandatory Requirement Notes plus the mandatory consent-verification field; no automatic email-address validation or separate exception-reason field is claimed.
 - No Deal edits, transition executions, trigger replays, messages, or protected-router changes occurred. Runtime tests remain blocked pending reconciliation of the direct-send test orchestrator and sender/deduplication isolation.
 
-### T04 continuation — financial-gate prerequisite inspection, 30 October 2026
-- Draft `1287721000004162041` was reopened and the `Move to Advance Requested` transition was inspected. Its During panel still has mandatory `Advance Amount` with validation `Advance Amount = 10000` and alert `Advance amount must be exactly ₹10,000.`
-- This conflicts with the approved control requirement for an authoritative approved amount/version and visible partial-payment handling. Existing reusable fields include `Advance Amount`, `Advance Received`, `Advance Payment Date`, `Advance Payment Mode`, `Advance Transaction ID`, `Advance Verified`, and approval/rejection status fields, but the authoritative accounting source, receipt verifier identity, approval values and no-self-approval enforcement were not established.
-- A draft-only attempt to replace the fixed amount rule with a positive threshold was rejected by Zoho as an invalid Advance Amount and was discarded by reopening the draft. No financial Blueprint edit was saved or published.
-- T04 is blocked pending confirmation of the financial source and MD approval/self-approval policy. No Deal edits, transition executions, payment changes, messages or trigger replays occurred.
+### T04 continuation — financial request controls saved, 30 October 2026
+- Draft `1287721000004162041`, `Move to Advance Requested` During, now has mandatory `Advance Amount` with validation `Advance Amount >= 0.01` and alert `Enter an advance amount greater than zero.` It also has mandatory `Advance Requested Date` and `Advance Due Date`.
+- Root cause of the earlier save failure: Zoho's masked currency input did not accept the automation `fill()` replacement; the old value remained submitted. Keyboard replacement of the visible value to `0.01`, followed by `>=`, saved successfully.
+- Draft was saved, reopened and verified. Published Blueprint `1287721000002448077` remains unchanged. No Deal edits, transition executions, payment changes, messages or trigger replays occurred.
+- Remaining T04 blocker: authoritative accounting amount/version, MD approval values and no-self-approval enforcement, verified receipt/identity, partial-payment and rejection/resubmission controls are not yet established. Do not publish or claim T04 complete until those dependencies are resolved.
 
 ## Implementation journal — 29 October continuation
 
