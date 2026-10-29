@@ -1,5 +1,5 @@
 # ISF CRM implementation task tracker
-Updated 29 October 2026 (IST). Organisation 60070586928.
+Updated 30 October 2026 (IST). Organisation 60070586928.
 
 ## Active direction
 User approved the role-workspace and automation restructuring plan and requested sequential execution. This queue supersedes the historical task order below. Existing verified configurations must be reused. A specification is never reported as deployed or tested configuration.
@@ -9,7 +9,7 @@ User approved the role-workspace and automation restructuring plan and requested
 |---|---|---|---|
 | T01 | Finalise the 22-activity control matrix | All 22 activities have owner, prerequisites, evidence, optional paths, next task and notification policy | Complete: specification only |
 | T02 | Map and align authoritative fields/layouts | Existing fields mapped; layout gaps repaired safely; remaining source/permission dependencies explicit | Baseline implemented: two existing fields added to Deal Pipeline and verified; accounting/permission checks remain in later tasks |
-| T03 | Repair qualification, contact and sales gates | Missing/invalid contact, requirements, quote and order data blocked; controlled exceptions; WhatsApp consent separated | Draft configured and reopened: Discovery, Quote Sent and Order Confirmation; not published; phone exception, acceptance/handoff controls and runtime checks pending |
+| T03 | Repair qualification, contact and sales gates | Missing/invalid contact, requirements, quote and order data blocked; controlled exceptions; WhatsApp consent separated | Draft re-saved and reopened: Discovery, Quote Sent and Order Confirmation; acceptance checklist, Contract Value validation, existing handoff workflow and WhatsApp sender eligibility verified; not published; controlled email-only path and runtime checks blocked |
 | T04 | Repair financial gates and MD approvals | Approved amount/version; verified receipt; partial payments; rejection/resubmission and no self-approval bypass | Queued |
 | T05 | Repair visit, preparation, execution and closure gates | Correct dates, readiness, evidence, conditional contract/sample paths and closure exceptions | Queued |
 | T06 | Connect small action forms for all 22 activities | Reuse Kiosks/Wizards; preload same records; validate, write and bind each action; hide routing fields | Queued |
@@ -20,15 +20,19 @@ User approved the role-workspace and automation restructuring plan and requested
 | T11 | Configure internal reminders and customer notifications | Assigned-person notification, agreed escalation, cancellation on completion/reschedule; consent/template/dedup guards | Queued |
 | T12 | Acceptance, controlled release and user guide | Positive/negative/role/repeat/failure cases pass; rollback recorded; three-role guide available | Queued |
 
-Progress: T01 specification complete; T02 baseline field alignment implemented; T03 partially configured in an unpublished draft. T04–T12 remain queued. No percentage of live CRM implementation is implied. T06 contains 22 separately verified action forms.
+Progress: T01 specification complete; T02 baseline field alignment implemented; T03 remains partially configured in an unpublished draft with verified persistence for the latest saved controls. T04–T12 remain queued. No percentage of live CRM implementation is implied. T06 contains 22 separately verified action forms.
 
 ## Implementation journal — 30 October continuation on this device
 
 - Read the attached implementation tracker first and resumed the first unfinished task, T03. The attached wizard document was treated as procedural guidance; its guardrails remain subordinate to the user request and were preserved.
-- T03 latest saved-state claims require CRM verification: the customer-acceptance checklist and Contract Value greater-than-zero validation were reportedly saved after the 29 October journal, but they have not been reopened and verified in this session.
-- Zoho CRM/browser control is unavailable on this device. Therefore the controlled email-only contact exception, handoff controls, sender eligibility, saved-draft reopen check and any Blueprint persistence/runtime checks remain blocked and are not claimed complete.
-- No CRM record, Blueprint, workflow, WhatsApp router, message, trigger, or test Deal was changed or invoked. The TEST-DATA Deal 1287721000003658001 remains untouched.
-- Repository synchronization: this tracker is being committed to the main branch so the other device can resume from the same evidence.
+- Draft `1287721000004162041` was opened, saved as draft, reopened, and verified. Published Blueprint `1287721000002448077` was not changed and Publish/Republish was not pressed.
+- Order Confirmation transition `1287721000004162049` now visibly contains the mandatory `Customer order acceptance` checklist with: (1) acceptance date, channel and evidence reference recorded in Negotiation Notes; and (2) agreed scope, quotation revision, price and terms match the acceptance. This checklist is saved and persisted on reopen.
+- The same transition visibly contains mandatory Contract Value with validation `Contract Value >= 0.01` and alert `Enter the agreed order value greater than zero.` This validation is saved and persisted on reopen.
+- Existing active workflow `Process Step → Order Confirmation` (`1287721000002144373`) was verified read-only. It sets `WA_Event` to `order_confirmation` and creates the existing `Verify customer order and execution handoff` task. No Blueprint task was added, avoiding a duplicate handoff.
+- Controlled email-only exception remains blocked: Discovery still requires Mobile Number, and the Deal-level fields/criteria inspected do not provide a verifiable email destination plus explicit exception-reason control. Do not relax the normal phone gate or publish until a supported controlled route is built and tested.
+- WhatsApp sender eligibility was checked read-only: Business Messaging is active for India Sports Infra, associated phone `+917338858989`, available credits shown as `1`; the notification inventory contains the established Deal templates including quote sent, order confirmed, advance request/received, work started/completed, final payment and handover. This confirms channel/sender availability only, not runtime eligibility, consent, deduplication or delivery.
+- No Deal was advanced/reset, no customer record was edited, no message was sent/resend, no trigger replay/debug was run, and the protected live router was not changed. TEST-DATA Deal `1287721000003658001` remains untouched.
+- T03 status: verified draft controls and existing handoff; unpublished; runtime-tested = no; controlled email-only exception = blocked; sender exclusivity and automation isolation remain unverified. T03 is not complete or live.
 
 ## Implementation journal — 29 October continuation
 
@@ -43,9 +47,9 @@ Progress: T01 specification complete; T02 baseline field alignment implemented; 
 - Discovery draft transition 1287721000004162044: retained mandatory Requirement Notes; added mandatory Contact Name, Mobile Number, Sport Type and Site Location. These saved fields were reopened and verified. This is the normal phone path only; controlled email-only exception is not built, so do not publish as the complete contact policy.
 - Quote Sent draft transition 1287721000004162046: retained mandatory Contact Name, Quotation Sent Date and Quotation Amount; added mandatory Quotation Reference; changed Whatsapp Number and WhatsApp Opt In from mandatory to optional. No consent value was selected or manufactured. Messaging eligibility must continue to be enforced separately by a verified sender path.
 - Quotation Amount validation: >= 0.01; alert "Enter an approved quotation amount greater than zero." Saved, reopened and verified. An earlier attempt using > 0 did not persist; it was corrected before the final saved verification. Do not report the failed attempt as the final configuration.
-- Order Confirmation: retained mandatory Negotiation Notes; added mandatory Contact Name, Contract Value, Scope Summary and Quotation Reference. Reopened and verified. Customer-acceptance checklist was explored but not saved; no checklist or automatic evidence verification is claimed. Contract Value positive-value validation and execution handoff assignment still require work.
-- Before owners/criteria and After actions were not changed. No transition was executed; no Deal was advanced/reset; no message, Flow test/debug, or trigger replay was run.
-- Draft acceptance checks: persistence of field requirements/optional states and quotation criterion passed. Missing/invalid/valid record tests, roles, alternative contact route and sender exclusivity remain untested. T03 is not complete or live.
+- Order Confirmation: retained mandatory Negotiation Notes; added mandatory Contact Name, Contract Value, Scope Summary and Quotation Reference. Latest reopen verifies the mandatory customer-acceptance checklist (evidence plus scope/revision/price/terms) and Contract Value `>= 0.01` validation with the saved positive-value alert. Automatic evidence verification is not claimed.
+- Existing active workflow `Process Step → Order Confirmation` supplies the `order_confirmation` router event and the existing `Verify customer order and execution handoff` task. No Blueprint duplicate was added. No transition was executed; no Deal was advanced/reset; no message, Flow test/debug, or trigger replay was run.
+- Draft acceptance checks: persistence of field requirements/optional states, quotation criterion, acceptance checklist, and Contract Value criterion passed. Missing/invalid/valid record tests, roles, controlled email-only route, sender exclusivity and runtime behavior remain untested or blocked. T03 is not complete or live.
 - Rollback before release: leave published version in place; discard/revert only the documented draft edits through the supported draft interface after checking for later user edits. Do not overwrite later work or delete the published process.
 
 ### Test dependency found during prior continuation
