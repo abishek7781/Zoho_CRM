@@ -126,6 +126,12 @@ Progress: T01 specification complete; T02 baseline field alignment implemented; 
 - MD guide: use Activity Stats for organisation-wide task risk; approve only supported, evidenced payment requests; treat requester self-approval as a residual limitation; do not interpret task totals as reconciled finance totals.
 - T12 status: documentation/release controls saved in this tracker; live acceptance remains intentionally unrun under the no-transition/no-send boundary.
 
+### Approved controlled-test continuation — Zoho UI block, 30 October 2026
+- User explicitly approved the preferred safe test plan: a new isolated non-customer Deal with no phone, email or WhatsApp opt-in; a temporary exact-ID non-sending sender-claim test; one non-mutating Kiosk lookup; and the documented least-privilege role visibility policy.
+- Attempted to create the isolated Deal through CRM's global Create > Deal control. Zoho navigated to the Deal create URL but remained indefinitely on its loading skeleton and exposed no fields, save control or record ID. No record was created.
+- Attempted to open Profiles for the approved field-visibility work. That page likewise remained on Zoho's loading shell with no profile list or editable control. No role, profile, layout, sharing or field permission was changed.
+- Existing open Workflow Rules pages continued to render, so this is recorded as a targeted Zoho UI/session loading failure rather than a completed test or permission configuration. Do not treat the approved authority as having produced any live change; resume the controlled test only once the Deal form and Profiles page render normally.
+
 ## Implementation journal — 29 October continuation
 
 ### T02 saved production layout change
