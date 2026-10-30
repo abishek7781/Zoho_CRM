@@ -132,6 +132,11 @@ Progress: T01 specification complete; T02 baseline field alignment implemented; 
 - Attempted to open Profiles for the approved field-visibility work. That page likewise remained on Zoho's loading shell with no profile list or editable control. No role, profile, layout, sharing or field permission was changed.
 - Existing open Workflow Rules pages continued to render, so this is recorded as a targeted Zoho UI/session loading failure rather than a completed test or permission configuration. Do not treat the approved authority as having produced any live change; resume the controlled test only once the Deal form and Profiles page render normally.
 
+### Approved controlled-test continuation — isolated Deal created, 30 October 2026
+- Zoho form access recovered. Created the approved isolated Deal `ISF NONSENDING CONTROL TEST 20261030` (`1287721000004198002`) linked only to the existing `TEST-DATA — Pushparaj QA Account` (`1287721000003424116`), not to a customer Account or Contact.
+- The test Deal has no Contact, Mobile Number, WhatsApp Number, email destination, WhatsApp opt-in, WhatsApp consent verification or consent evidence. It was created with `Test user 2 Accounts` solely to satisfy the layout's mandatory `Advance Receipt Verified By` field. No money, receipt, approval request, message or customer data was entered.
+- The Deal therefore provides an exact record ID for an isolated non-sending workflow/Kiosk test. The test rule has not yet been created or enabled; the Workflow Rules page was still loading when this entry was recorded. No notification credit was consumed and no protected router or existing rule was changed.
+
 ## Implementation journal — 29 October continuation
 
 ### T02 saved production layout change
